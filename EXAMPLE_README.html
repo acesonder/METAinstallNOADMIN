@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>MSI Installation Guide - Example</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        h1 { color: #333; border-bottom: 2px solid #0066cc; padding-bottom: 10px; }
+        h2 { color: #0066cc; margin-top: 20px; }
+        .file-tree { background-color: white; padding: 15px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .folder { color: #0066cc; font-weight: bold; margin-top: 10px; }
+        .file { color: #333; margin-left: 20px; font-family: monospace; }
+        .info { background-color: #e7f3ff; padding: 10px; border-left: 4px solid #0066cc; margin: 10px 0; }
+        .note { background-color: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>MSI Installation Guide</h1>
+    <div class='note'>
+        <strong>Note:</strong> This is an example of what the automatically generated readmeINSTALL.html file looks like.
+        The actual file will be created when you extract an MSI using either the Windows or Web application.
+    </div>
+    
+    <div class='info'><strong>Extraction Date:</strong> 2025-11-17 17:00:00</div>
+    <div class='info'><strong>Extract Location:</strong> C:\Users\YourName\Documents\MSI_Extract_ExampleApp</div>
+    
+    <h2>File and Folder Structure</h2>
+    <div class='file-tree'>
+        <p>The following files and folders were extracted from the MSI package:</p>
+        <div class='folder' style='margin-left: 0px;'>📁 ProgramFilesFolder/</div>
+        <div class='folder' style='margin-left: 20px;'>📁 ExampleApp/</div>
+        <div class='file' style='margin-left: 40px;'>📄 ExampleApp.exe (2.45 MB)</div>
+        <div class='file' style='margin-left: 40px;'>📄 config.json (1.24 KB)</div>
+        <div class='file' style='margin-left: 40px;'>📄 README.txt (3.45 KB)</div>
+        <div class='folder' style='margin-left: 40px;'>📁 Resources/</div>
+        <div class='file' style='margin-left: 60px;'>📄 logo.png (45.67 KB)</div>
+        <div class='file' style='margin-left: 60px;'>📄 icon.ico (12.34 KB)</div>
+        <div class='folder' style='margin-left: 40px;'>📁 Plugins/</div>
+        <div class='file' style='margin-left: 60px;'>📄 plugin1.dll (567.89 KB)</div>
+        <div class='file' style='margin-left: 60px;'>📄 plugin2.dll (234.56 KB)</div>
+        <div class='folder' style='margin-left: 0px;'>📁 CommonFilesFolder/</div>
+        <div class='folder' style='margin-left: 20px;'>📁 Shared/</div>
+        <div class='file' style='margin-left: 40px;'>📄 shared.dll (123.45 KB)</div>
+    </div>
+    
+    <h2>Installation Instructions</h2>
+    <div class='info'>
+        <p>After extraction, files should typically be placed in the following locations:</p>
+        <ul>
+            <li><strong>Program Files:</strong> Usually go to <code>C:\Program Files\[AppName]\</code> or <code>C:\Program Files (x86)\[AppName]\</code></li>
+            <li><strong>User Data:</strong> Often goes to <code>%APPDATA%\[AppName]\</code> or <code>%LOCALAPPDATA%\[AppName]\</code></li>
+            <li><strong>System Files:</strong> May need to be placed in <code>C:\Windows\System32\</code> (requires admin)</li>
+        </ul>
+        <p><strong>Note:</strong> For non-admin installation, files can be placed in user-accessible locations such as:</p>
+        <ul>
+            <li><code>%LOCALAPPDATA%\Programs\[AppName]\</code></li>
+            <li><code>%USERPROFILE%\[AppName]\</code></li>
+        </ul>
+    </div>
+    
+    <h2>Manual Installation Steps</h2>
+    <div class='info'>
+        <h3>For User-Level Installation (No Admin Required):</h3>
+        <ol>
+            <li>Create a folder: <code>%LOCALAPPDATA%\Programs\ExampleApp</code></li>
+            <li>Copy all files from <code>ProgramFilesFolder\ExampleApp\</code> to the new location</li>
+            <li>Create a desktop shortcut to <code>ExampleApp.exe</code></li>
+            <li>Optionally, add the program folder to your PATH environment variable</li>
+        </ol>
+        
+        <h3>Environment Variables:</h3>
+        <p>To access the special folders mentioned above, you can use Windows Run (Win+R) or File Explorer:</p>
+        <ul>
+            <li><code>%LOCALAPPDATA%</code> → <code>C:\Users\YourName\AppData\Local</code></li>
+            <li><code>%APPDATA%</code> → <code>C:\Users\YourName\AppData\Roaming</code></li>
+            <li><code>%USERPROFILE%</code> → <code>C:\Users\YourName</code></li>
+        </ul>
+    </div>
+    
+    <h2>Troubleshooting</h2>
+    <div class='info'>
+        <p><strong>If the application doesn't start:</strong></p>
+        <ul>
+            <li>Ensure all files are in the correct location</li>
+            <li>Check if any .NET Framework or Visual C++ redistributables are required</li>
+            <li>Look for missing DLL errors and install required dependencies</li>
+            <li>Check Windows Event Viewer for error details</li>
+        </ul>
+        
+        <p><strong>If you get "Access Denied" errors:</strong></p>
+        <ul>
+            <li>Use user-accessible folders like %LOCALAPPDATA%\Programs</li>
+            <li>Avoid system folders like C:\Program Files or C:\Windows\System32</li>
+            <li>Right-click the folder → Properties → Security to check permissions</li>
+        </ul>
+    </div>
+    
+    <div class='note'>
+        <p><strong>About This Tool:</strong></p>
+        <p>This documentation was automatically generated by the METAinstallNOADMIN application. 
+        The tool extracts MSI packages and creates detailed documentation to help you understand 
+        and manually deploy applications without requiring administrator privileges.</p>
+        <p>For more information, visit: <a href="https://github.com/acesonder/METAinstallNOADMIN">GitHub Repository</a></p>
+    </div>
+</body>
+</html>
