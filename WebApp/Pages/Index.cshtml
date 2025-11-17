@@ -1,0 +1,83 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "MSI Installer - No Admin Required";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">MSI Installer - No Admin Required</h1>
+    
+    <div class="alert alert-info">
+        <strong>Note:</strong> This web application allows you to manage MSI files on Windows systems without requiring administrator privileges.
+    </div>
+
+    <form method="post" enctype="multipart/form-data" id="msiForm">
+        <div class="mb-3">
+            <label for="msiFile" class="form-label">Select MSI File</label>
+            <input type="file" class="form-control" id="msiFile" name="msiFile" accept=".msi" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="extractPath" class="form-label">Extract to Path (for extraction only)</label>
+            <input type="text" class="form-control" id="extractPath" name="extractPath" 
+                   placeholder="C:\Users\YourName\Documents\MSI_Extract" 
+                   value="@Model.DefaultExtractPath">
+            <small class="form-text text-muted">Leave empty to use default location in your Documents folder</small>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" name="action" value="install" class="btn btn-primary me-2">
+                <i class="bi bi-download"></i> Install MSI (No Admin)
+            </button>
+            <button type="submit" name="action" value="extract" class="btn btn-success">
+                <i class="bi bi-folder-open"></i> Extract MSI Contents
+            </button>
+        </div>
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model.StatusMessage))
+    {
+        <div class="alert @(Model.IsSuccess ? "alert-success" : "alert-danger") mt-3">
+            @Html.Raw(Model.StatusMessage)
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.ReadmePath))
+    {
+        <div class="alert alert-success mt-3">
+            <h5>Extraction Complete!</h5>
+            <p>Files have been extracted. A readmeINSTALL.html file has been generated at:</p>
+            <p><strong>@Model.ReadmePath</strong></p>
+            <a href="@Url.Page("/Index", "ViewReadme", new { path = Model.ReadmePath })" class="btn btn-sm btn-info" target="_blank">View Installation Guide</a>
+        </div>
+    }
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5>How It Works</h5>
+        </div>
+        <div class="card-body">
+            <h6>Install MSI (No Admin):</h6>
+            <p>Uses <code>msiexec</code> with per-user installation flags (ALLUSERS=2 MSIINSTALLPERUSER=1) to install the MSI package for the current user only, without requiring administrator privileges.</p>
+            
+            <h6>Extract MSI Contents:</h6>
+            <p>Uses <code>msiexec /a</code> to perform an administrative installation, which extracts all files from the MSI package to a folder of your choice. A <strong>readmeINSTALL.html</strong> file is automatically generated, detailing:</p>
+            <ul>
+                <li>Complete file and folder structure</li>
+                <li>File sizes and locations</li>
+                <li>Installation instructions for manual deployment</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('msiForm').addEventListener('submit', function() {
+            document.querySelectorAll('button[type="submit"]').forEach(btn => {
+                btn.disabled = true;
+                btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processing...';
+            });
+        });
+    </script>
+}
