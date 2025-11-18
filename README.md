@@ -11,6 +11,10 @@ MSI Installer applications that allow you to install or extract MSI files withou
   - File sizes and locations
   - Installation instructions for manual deployment
   - Recommended installation paths for non-admin scenarios
+- **Comprehensive testing tools** - Included scripts to verify functionality with any MSI file
+  - Automated verification script
+  - Specific application testing
+  - Detailed reporting and analysis
 
 ## 📦 Applications
 
@@ -166,6 +170,35 @@ dotnet build
 cd ../WebApp
 dotnet build
 ```
+
+## 🧪 Testing and Verification
+
+To verify that the MSI extraction and installation functionality works correctly, use the included testing tools:
+
+### Quick Test with Any MSI File
+```cmd
+Test-MSI.bat "C:\path\to\your.msi"
+```
+
+### Comprehensive Verification
+```powershell
+# Basic verification (no MSI required)
+.\Verify-MSIExtraction.ps1
+
+# Full verification with test MSI
+.\Verify-MSIExtraction.ps1 -TestMsiPath "C:\path\to\test.msi"
+```
+
+### Detailed Testing of Specific Applications
+```powershell
+# Test World Creator or any specific app
+.\Test-SpecificMSI.ps1 -MsiPath "C:\path\to\app.msi" -AppName "MyApp"
+
+# Extract only (skip installation)
+.\Test-SpecificMSI.ps1 -MsiPath "C:\path\to\app.msi" -ExtractOnly
+```
+
+For complete testing instructions, see [TESTING.md](TESTING.md).
 
 ## 📄 License
 
